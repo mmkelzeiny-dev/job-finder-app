@@ -131,12 +131,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               onPressed: () async {
                                 final job = jobController.text.trim();
                                 final location = locationController.text.trim();
-                                print("SEARCH BUTTON PRESSED");
-                                print("job = $job, location = $location");
                                 if (job.isEmpty) return;
-
                                 await jobProvider.fetchJobs(job, location);
-
                                 if (jobProvider.jobs.isNotEmpty &&
                                     context.mounted) {
                                   Navigator.push(
@@ -166,168 +162,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-
-                      ElevatedButton(
-                        onPressed: () async {
-                          final all = await storage.readAll();
-                          print(
-                            "ALL YOUR SAVED DATA: $all",
-                          ); // ← This will show your JWT
-
-                          final token =
-                              await storage.read(key: "jwt_token") ??
-                              await storage.read(key: "access_token") ??
-                              await storage.read(key: "token") ??
-                              await storage.read(key: "idToken");
-
-                          print("YOUR JWT TOKEN IS: $token");
-                        },
-                        child: Text("DEBUG: Show JWT"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          final token =
-                              await storage.read(key: "jwt_token") ??
-                              "No JWT found";
-
-                          // Show Snackbar
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text("JWT: $token"),
-                              duration: Duration(seconds: 5),
-                            ),
-                          );
-                        },
-                        child: Text("DEBUG: Show JWT"),
-                      ),
                     ],
                   ),
                 ),
-                // const SizedBox(height: 200),
-                // IntrinsicWidth(
-                //   child: jobProvider.isLoading
-                //       ? CircularProgressIndicator(
-                //           valueColor: AlwaysStoppedAnimation<Color>(
-                //             Colors.purple,
-                //           ),
-                //         )
-                //       : Column(
-                //           children: [
-                //             Container(
-                //               decoration: BoxDecoration(
-                //                 borderRadius: BorderRadius.circular(12),
-                //                 gradient: const LinearGradient(
-                //                   colors: <Color>[
-                //                     Color(0xFF42A5F5), // Deep blue
-                //                     Color(0xFF1976D2), // Medium blue
-                //                     Color(0xFF42A5F5), // Light blue
-                //                   ],
-                //                 ),
-                //               ),
-                //               child: SizedBox(
-                //                 width: double.infinity,
-                //                 child: ElevatedButton(
-                //                   onPressed: () async {
-                //                     final job = jobController.text.trim();
-                //                     final location = locationController.text
-                //                         .trim();
-                //                     print("SEARCH BUTTON PRESSED");
-                //                     print("job = $job, location = $location");
-                //                     if (job.isEmpty) return;
-
-                //                     await jobProvider.fetchJobs(job, location);
-
-                //                     if (jobProvider.jobs.isNotEmpty &&
-                //                         context.mounted) {
-                //                       Navigator.push(
-                //                         context,
-                //                         MaterialPageRoute(
-                //                           builder: (_) => const ResultsScreen(),
-                //                         ),
-                //                       );
-                //                     } else {
-                //                       ScaffoldMessenger.of(
-                //                         context,
-                //                       ).showSnackBar(
-                //                         const SnackBar(
-                //                           content: Text('No jobs found'),
-                //                         ),
-                //                       );
-                //                     }
-                //                   },
-                //                   style: ElevatedButton.styleFrom(
-                //                     foregroundColor: Colors.white,
-                //                     backgroundColor: Colors.transparent,
-                //                     shadowColor: Colors.transparent,
-                //                     shape: RoundedRectangleBorder(
-                //                       borderRadius: BorderRadius.circular(12),
-                //                     ),
-                //                   ),
-                //                   child: const Padding(
-                //                     padding: EdgeInsets.symmetric(
-                //                       vertical: 12,
-                //                       horizontal: 16,
-                //                     ),
-                //                     child: Text(
-                //                       'Find jobs',
-                //                       style: TextStyle(
-                //                         fontWeight: FontWeight.bold,
-                //                       ),
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //             const SizedBox(height: 20),
-                //             // Saved jobs button
-                //             Container(
-                //               decoration: BoxDecoration(
-                //                 borderRadius: BorderRadius.circular(12),
-                //                 gradient: const LinearGradient(
-                //                   colors: <Color>[
-                //                     Color(0xFF42A5F5), // Deep blue
-                //                     Color(0xFF1976D2), // Medium blue
-                //                     Color(0xFF42A5F5), // Light blue
-                //                   ],
-                //                 ),
-                //               ),
-                //               child: ElevatedButton(
-                //                 onPressed: () async {
-                //                   await jobProvider.fetchSavedJobs();
-                //                   if (context.mounted) {
-                //                     Navigator.push(
-                //                       context,
-                //                       MaterialPageRoute(
-                //                         builder: (_) => const SavedJobsScreen(),
-                //                       ),
-                //                     );
-                //                   }
-                //                 },
-                //                 style: ElevatedButton.styleFrom(
-                //                   foregroundColor: Colors.white,
-                //                   backgroundColor: Colors.transparent,
-                //                   shadowColor: Colors.transparent,
-                //                   shape: RoundedRectangleBorder(
-                //                     borderRadius: BorderRadius.circular(12),
-                //                   ),
-                //                 ),
-                //                 child: const Padding(
-                //                   padding: EdgeInsets.symmetric(
-                //                     vertical: 12,
-                //                     horizontal: 16,
-                //                   ),
-                //                   child: Text(
-                //                     'View Saved Jobs',
-                //                     style: TextStyle(
-                //                       fontWeight: FontWeight.bold,
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //           ],
-                //         ),
-                // ),
               ],
             ),
           ),

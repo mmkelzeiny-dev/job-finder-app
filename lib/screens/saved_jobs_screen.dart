@@ -38,9 +38,6 @@ class SavedJobsScreen extends StatelessWidget {
                 itemCount: jobProvider.jobs.length,
                 itemBuilder: (context, index) {
                   final job = jobProvider.jobs[index];
-                  // final cardColor = index % 2 == 0
-                  //     ? Colors.white
-                  //     : Color(0xFFFFE0B2);
                   return Card(
                     color: Color(0xFFFFE0B2),
                     shape: RoundedRectangleBorder(),

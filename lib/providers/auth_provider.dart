@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import '../services/auth_service.dart'; // <- make sure you import your AuthService
+import '../services/auth_service.dart';
 
 class AuthProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -50,7 +50,6 @@ class AuthProvider extends ChangeNotifier {
 
       user = userCredential.user;
 
-      // ===== FIXED: always get token from Firebase user =====
       final idToken = await userCredential.user?.getIdToken();
       if (idToken != null) {
         final success = await AuthService.signInWithGoogleCustomToken(idToken);

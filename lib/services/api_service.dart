@@ -2,7 +2,6 @@ import '../models/job.dart';
 import 'auth_service.dart'; // Ensure this path is correct
 
 class ApiService {
-  // Fetch jobs (Assuming /jobs is NOT protected)
   static Future<List<Job>> fetchJobs(String job, String location) async {
     try {
       // Use the global dio instance
@@ -54,10 +53,8 @@ class ApiService {
     }
   }
 
-  // Get saved jobs (SECURED - relies on JWT in Interceptor)
   static Future<List<Job>> getSavedJobs() async {
     try {
-      // Clean path: /saved-jobs (no user ID)
       final response = await dio.get('/saved-jobs');
 
       if (response.statusCode == 200) {
@@ -72,12 +69,8 @@ class ApiService {
     }
   }
 
-  // Delete saved job (Assumes backend is updated to use JWT for user check)
-  // NOTE: You still need to ensure your backend delete endpoint is clean.
   static Future<void> deleteSavedJob(int jobId) async {
     try {
-      // Assuming your backend now only requires the jobId in the path,
-      // and gets the user ID from the JWT: /saved-job/{jobId}
       final response = await dio.delete('/saved-job/$jobId');
 
       if (response.statusCode != 200) {

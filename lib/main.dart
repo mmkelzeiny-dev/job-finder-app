@@ -22,7 +22,6 @@ Future<void> initializeApp() async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // CRITICAL FIX: AWAIT the setup function to ensure DIO and Firebase are ready
   await initializeApp();
 
   runApp(
