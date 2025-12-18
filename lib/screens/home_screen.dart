@@ -5,7 +5,6 @@ import 'package:flutter_application_1/screens/saved_jobs_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/job_provider.dart';
 import 'results_screen.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final jobProvider = Provider.of<JobProvider>(context, listen: true);
     final authProvider = Provider.of<AuthProvider>(context);
-    const storage = FlutterSecureStorage();
+
     return GradientBackground(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
